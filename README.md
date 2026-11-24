@@ -56,19 +56,24 @@ mkdir -p .agent-logs
 # Standalone headless run:
 claude -p --model sonnet "Implement vault/Agents/Specs/T-1.md. Short report." > .agent-logs/claude-T-1.out 2>&1
 
-# Codex
-codex exec -m gpt-6.2-sol -c model_reasoning_effort=medium "Implement vault/Agents/Specs/T-2.md. Follow AGENTS.md." > .agent-logs/codex-T-2.out 2>&1
+# Codex (multi_agent_v2 lets it spawn its own subagents)
+codex exec -c features.multi_agent_v2=true -c model_reasoning_effort="medium" \
+  "Implement vault/Agents/Specs/T-2.md. Follow AGENTS.md." > .agent-logs/codex-T-2.out 2>&1
 
-# Antigravity
-agy -p --model gemini-4 "Implement vault/Agents/Specs/T-3.md. Follow AGENTS.md." > .agent-logs/agy-T-3.out 2>&1
+# Antigravity (the *orchestrator* models delegate to subagents; `agy models` lists what you have)
+agy -p "Implement vault/Agents/Specs/T-3.md. Follow AGENTS.md." \
+  --model gemini-pro-orchestrator-neon --dangerously-skip-permissions > .agent-logs/agy-T-3.out 2>&1
+# ...or on the Claude models inside Antigravity when Gemini quota is low:
+#   --model claude-sonnet-5-5-high   (Heavy: claude-opus-5-5-high)
 
 # Grok
-grok -p -m grok-4.7 "Implement vault/Agents/Specs/T-4.md. Follow AGENTS.md." > .agent-logs/grok-T-4.out 2>&1
+grok -p "Implement vault/Agents/Specs/T-4.md. Follow AGENTS.md." \
+  -m grok-4.7 --reasoning-effort medium --always-approve --background-wait-timeout 60 > .agent-logs/grok-T-4.out 2>&1
 
 tools/agent_usage.sh .agent-logs   # before launching and when they finish
 ```
 
-CLI flags change between versions: check `<agent> --help` and adjust.
+These are the exact invocations used in practice (late 2026). CLI flags change between versions: check `<agent> --help` and adjust. The auto-approve flags let agents run commands without asking: run them only inside a git worktree you can throw away.
 
 ## Customizing model names
 
