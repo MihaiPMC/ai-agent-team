@@ -8,11 +8,11 @@ Several agents share one machine and one Roblox Studio app. Rules so nobody brea
 - **Your own test place** (exactly ONE window per agent, never more):
   ```sh
   rojo build -o test-<agent>.rbxl
-  pkill -f "localPlaceFile .*test-<agent>.rbxl" ; sleep 2          # close only YOUR previous test window
+  pkill -9 -f "localPlaceFile .*test-<agent>.rbxl" ; sleep 2          # close only YOUR previous test window
   /Applications/RobloxStudio.app/Contents/MacOS/RobloxStudio -localPlaceFile "$PWD/test-<agent>.rbxl" >/dev/null 2>&1 &
   ```
   **Never use `open -a RobloxStudio ...`**: it asks the already-running Studio to open the file and leaves an empty Home window behind.
-  Wait (poll `list_roblox_studios` every ~5 s, up to 60 s) until `test-<agent>.rbxl` appears with mode Edit, then use ONLY that `studio_id`. After code changes: rebuild + the same three commands (same file name). When done: `pkill -f "localPlaceFile .*test-<agent>.rbxl"`.
+  Wait (poll `list_roblox_studios` every ~5 s, up to 60 s) until `test-<agent>.rbxl` appears with mode Edit, then use ONLY that `studio_id`. After code changes: rebuild + the same three commands (same file name). When done: `pkill -9 -f "localPlaceFile .*test-<agent>.rbxl"`.
   (Adjust the Studio path on Windows/Linux setups.)
 
 ## Rojo
@@ -24,3 +24,4 @@ Several agents share one machine and one Roblox Studio app. Rules so nobody brea
 - Attach your best screenshot path in your spec note before asking for review.
 - Do not edit scripts inside Studio: the files in git are the source of truth.
 - Max ~3 Play cycles per task unless you are debugging a real failure.
+- Close test windows with `pkill -9` (a plain kill leaves Studio stuck on a hidden "Save changes?" dialog). Test places are rebuilt from git, nothing is lost.
