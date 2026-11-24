@@ -11,14 +11,16 @@ Built by several AI coding agents working together through a shared vault (`vaul
 5. If `vault/Workflow/Studio_Protocol.md` exists (Roblox projects), follow it.
 
 ## Roles
-| Agent | Default role |
-|---|---|
-| Claude Code | Lead: architecture, task specs, complex systems, final review, merges into `main`. |
-| Codex | Server/backend systems from specs, second-opinion reviews of the lead's complex code. |
-| Antigravity | UI, visuals, front-end polish, research. |
-| Grok | Systems from specs, cross-agent reviews of Heavy code. |
+No fixed specialties: **every agent can implement anything** (systems/backend, UI, visuals, world building, research) and review anything.
 
-Roles are defaults, not walls: anyone can take any task on the Board if they claim it first. Edit this table to match the agents you actually use.
+| Agent | Role |
+|---|---|
+| Claude Code | Lead (architecture, specs, final review, merges into `main`, usage checks) **and** worker (via its subagents) |
+| Codex | Worker + reviewer, any kind of task |
+| Antigravity | Worker + reviewer, any kind of task |
+| Grok | Worker + reviewer, any kind of task |
+
+The lead assigns each Board task by availability, remaining usage, task tier and continuity (whoever built a system extends it most cheaply). Anyone may also claim an unassigned task. Heavy work is always reviewed by a different agent than its author. Edit this table to match the agents you actually use.
 
 ## Collaboration rules
 - **Claim before you work.** Set yourself as owner on the Board (status `claimed`) and list the files you will touch. Never work on a task or file someone else has claimed.

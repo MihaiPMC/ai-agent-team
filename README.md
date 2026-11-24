@@ -13,14 +13,16 @@ What you get:
 
 ## Roles
 
-| Role | Default agent | Does |
-|---|---|---|
-| Lead | Claude Code | Architecture, specs, complex systems, final review, merges into `main`, usage checks |
-| Implementer | Codex, Grok | Systems from specs; second-opinion reviews |
-| UI / visuals | Antigravity (`agy`) | Front-end, visuals, research |
-| Subagents | each agent's own cheaper models | Light/Standard pieces of the agent's task |
+There are no fixed specialties. **Every agent can do every kind of work**: systems/backend, UI, visuals, world building, research, reviews.
 
-Roles are defaults, not walls: anyone may take any Board task after claiming it. Edit the table in `AGENTS.md`.
+| Role | Who | Does |
+|---|---|---|
+| Lead | one agent (Claude Code by default) | Architecture, specs, final review, merges into `main`, usage checks, assigns tasks |
+| Workers | Claude Code subagents, Codex, Antigravity, Grok (any mix) | Implement any task from its spec: gameplay/backend, UI, visuals, VFX, world, research |
+| Reviewers | a stronger model, or a different agent than the author | Review diffs against the spec (Heavy work: always a different agent) |
+| Subagents | each agent's own cheaper models | Light/Standard pieces of that agent's task |
+
+**How the lead picks who does a task:** (1) who is free, (2) who has usage left (`tools/agent_usage.sh`), (3) the task's tier (Light/Standard/Heavy, see Token_Rules), (4) continuity: an agent that just built a system is the cheapest one to extend it. Run several instances of the same agent in parallel when it has headroom.
 
 ## How a task flows
 
