@@ -20,6 +20,8 @@ No fixed specialties: **every agent can implement anything** (systems/backend, U
 | Antigravity | Worker + reviewer, any kind of task |
 | Grok | Worker + reviewer, any kind of task |
 
+**Every agent (lead included) works as an orchestrator with its own subagents** on cheaper models for Light/Standard pieces, and reviews their output before committing (see README "Every agent makes its own subagents").
+
 The lead assigns each Board task by availability, remaining usage, task tier and continuity (whoever built a system extends it most cheaply). Anyone may also claim an unassigned task. Heavy work is always reviewed by a different agent than its author. Edit this table to match the agents you actually use.
 
 ## Collaboration rules

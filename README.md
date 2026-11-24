@@ -11,6 +11,17 @@ What you get:
 - **Usage guard**: a script checks how much plan each agent has left so nobody runs into paid overage.
 - Optional **Roblox module** (Rojo/Luau check script, shared Studio etiquette).
 
+## Every agent makes its own subagents
+
+All four agents work as **orchestrators**: split the task, hand the Light/Standard pieces to their own subagents on cheaper models / lower effort, keep the Heavy part, and review what comes back before committing.
+
+| Agent | How it spawns subagents |
+|---|---|
+| Claude Code | Agent/Task tool with `model: haiku` (Light) or `sonnet` (Standard); the main session (Opus) keeps Heavy work and reviews |
+| Codex | `-c features.multi_agent_v2=true`; subagents at low/medium reasoning effort |
+| Antigravity | orchestrator models (`gemini-pro-orchestrator-*`) delegate automatically; on Claude models ask it to use `claude-sonnet-*-low/medium` subagents |
+| Grok | its built-in subagents (or `--agents '<json>'` definitions) on the fast model for Light pieces |
+
 ## Roles
 
 There are no fixed specialties. **Every agent can do every kind of work**: systems/backend, UI, visuals, world building, research, reviews.

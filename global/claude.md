@@ -17,3 +17,4 @@
 - Never let an agent run into paid overage. Claude's own plan usage is only visible to the human (`/usage`).
 
 If a project has `vault/00_StartHere.md` and `AGENTS.md`, read them first: they hold the Board, Messages and project rules.
+- Work as an orchestrator: split tasks, hand Light pieces to Haiku subagents and Standard pieces to Sonnet subagents (give them the spec path, not pasted context), keep Heavy parts in the main session, review what they return.
